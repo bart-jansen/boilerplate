@@ -20,7 +20,7 @@ w.on('time', function (t) { time = t });
 
 var update = function(bundle) {
     var didError = false;
-    var writeStream = fs.createWriteStream(path.resolve('./js/bundle.js'));
+    var writeStream = fs.createWriteStream(path.resolve('./public/bundle.js'));
 
     bundle.on('error', function (err) {
         console.error(String(chalk.red(err)));
@@ -36,7 +36,7 @@ var update = function(bundle) {
 
     writeStream.on('close', function () {
         if (!didError) {
-            console.error(chalk.cyan(bytes) + chalk.grey(' bytes written to ') + chalk.cyan(path.resolve('./js/bundle.js'))
+            console.error(chalk.cyan(bytes) + chalk.grey(' bytes written to ') + chalk.cyan(path.resolve('./public/bundle.js'))
                 + ' (' + (time / 1000).toFixed(2) + ' seconds)'
             );
         }
@@ -55,4 +55,4 @@ var server = http.createServer(function(req, res){
   serve(req, res, finalhandler(req, res))
 });
 
-server.listen(1234, function() {console.log(chalk.grey('serving ') + chalk.blue(path.resolve('./js/')) + chalk.grey(' on port ') + chalk.blue('1234'));});
+server.listen(1234, function() {console.log(chalk.grey('serving ') + chalk.blue(path.resolve('./public/')) + chalk.grey(' on port ') + chalk.blue('1234'));});
