@@ -1,0 +1,43 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "browser": "app/index.js",
+  "scripts": {
+    "build": "browserify app/index.js -g uglifyify | uglifyjs --screw-ie8 -m -c dead_code,sequences,conditionals,booleans,unused,if_return,join_vars,drop_debugger > public/bundle.js",
+    "watch": "watchify app/index.js -d -v -o public/bundle.js",
+    "start": "npm run build && serve --compress public/ -p 1234",
+    "dev": "node ./bin/dev.js",
+    "test": "npm run lint -s && npm run build",
+    "lint-jscs": "jscs app/",
+    "lint-eslint": "eslint --ignore-path .gitignore app/",
+    "lint": "npm run lint-eslint && npm run lint-jscs"
+  },
+  "author": "Bart Jansen <b@rtjansen.nl>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bart-jansen/boilerplate.git"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "devDependencies": {
+    "browserify": "^11.1.0",
+    "chalk": "^1.0.0",
+    "eslint": "^0.22.1",
+    "finalhandler": "^0.3.6",
+    "jscs": "^1.7.3",
+    "serve-static": "^1.9.3",
+    "uglify-js": "^2.4.15",
+    "uglifyify": "^3.0.1",
+    "watchify": "^3.2.2"
+  },
+  "dependencies": {
+    "babelify": "^6.0.1",
+    "bowser": "^1.0.0",
+    "cssify": "^0.7.0",
+    "jquery": "^2.1.4"
+  }
+}
